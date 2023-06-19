@@ -4,6 +4,44 @@
  * Component that listens to an event, fades out an entity, swaps the texture, and fades it
  * back in.
  */
+AFRAME.registerComponent('navigationgraph',{
+  init:function(){
+      this.el.addEventListener('reloadNavHosts',function(evt){
+      
+      
+      var currNavHostGroup=document.getElementById(evt.detail.currNavHosts);
+      currNavHostGroup.setAttribute("scale","0 0 0");
+      var newNavHostGroup=document.getElementById(evt.detail.newNavHosts);
+      newNavHostGroup.setAttribute("scale","1 1 1");
+    });
+  }
+});
+AFRAME.registerComponent('navhost',{
+  schema:{
+    linkto:{type:"string",default:""},
+    NavHostGroup:{type:"string",default:""}
+  },
+  init:function(){
+    
+    //add image source ke navigationgraph
+    this.el.setAttribute("src","#navigationgraph");
+    //add icon supaya ngeliat kamera terus terusan
+    this.el.setAttribute("look-at","#cam");
+    var data=this.data;
+    
+    this.el.addEventListener('click',function(){
+      //set skybox gambar
+      var sky=document.getElementById("skybox");
+      sky.setAttribute("src",data.linkto);
+      
+      var NavHostComp=document.getElementById("NavHosts");
+      var currNavHosts=this.parentElement.getAttribute("id");
+      //Event buat ganti komponen di Navhosts 
+      NavHostComp.emit('reloadNavHosts',{newNavHosts:data.NavHostGroup,currNavHosts:currNavHosts});
+    });
+  }
+});
+
 AFRAME.registerComponent('set-image', {
     schema: {
       on: {type: 'string'},
