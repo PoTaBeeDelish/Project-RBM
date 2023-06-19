@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Elpico Mall Virtual Tour</title>
+    <meta name="description" content="Elpico Mall Virtual Tour">
+    
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!--animation component scripts-->
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    
+    <!--Script Buat Navigasi-->
+    <script>
+      AFRAME.registerComponent('navigationgraph',{
+        init:function(){
+            this.el.addEventListener('reloadNavHosts',function(evt){
+            
+            //get the entire current navhost group and scale it to 0
+            var currNavHostGroup=document.getElementById(evt.detail.currNavHosts);
+            currNavHostGroup.setAttribute("scale","0 0 0");
+            
+            //get the entire new navhost group and scale it to 1
+            var newNavHostGroup=document.getElementById(evt.detail.newNavHosts);
+            newNavHostGroup.setAttribute("scale","1 1 1");
+          });
+        }
+      });
+      AFRAME.registerComponent('navhost',{
+        schema:{
+          linkto:{type:"string",default:""},
+          NavHostGroup:{type:"string",default:""}
+        },
+        init:function(){
+          
+          //add image source of navigationgraph icon
+          this.el.setAttribute("src","#navigationgraph");
+          //make the icon look at the camera all the time
+          this.el.setAttribute("look-at","#cam");
+          
+          var data=this.data;
+          
+          this.el.addEventListener('click',function(){
+            //set the skybox source to the new image as per the navhost
+            var sky=document.getElementById("skybox");
+            sky.setAttribute("src",data.linkto);
+            
+            var NavHostComp=document.getElementById("NavHosts");
+            var currNavHosts=this.parentElement.getAttribute("id");
+            //create event for NavHosts component to change the NavHosts data
+            NavHostComp.emit('reloadNavHosts',{newNavHosts:data.NavHostGroup,currNavHosts:currNavHosts});
+          });
+        }
+      });
+    </script>
+  </head>
+  
+  <body>
+    <a-scene background="color: #ECECEC">
+      
+      <a-assets>
+        <!-- Scene Elpico Park-->
+       <img id="ElpicoPark1"  src="Scene/ElpicoPark1.jpg"/>
+        <img id="ElpicoPark2" src="Scene/ElpicoPark2.jpg"/> 
+        <img id="ElpicoPark3" src="Scene/ElpicoPark3.jpg"/> 
+        <img id="ElpicoParkEntrance" src="Scene/ElpicoParkEntrance.jpg" /> 
+        
+        <!-- Scene Lantai 2 --> 
+        <img id="Lt2" src="Scene/Lt2.jpg"/>
+        <img id="Lt2_1" src="Scene/Lt2(1).jpg"/>
+        <img id="Lt2MayStar" src="Scene/Lt2MayStar.jpg"/>
+        <img id="Lt2Pilatesandflow" src="Scene/Lt2Pilatesandflow.jpg"/>
+        <img id="Lt2SelatanUjung" src="Scene/Lt2SelatanUjung.jpg"/>
+        <img id="Lt2TanggaMiddle" src="Scene/Lt2TanggaMiddle.jpg"/>
+        <img id="Lt2TanggaSelatan" src="Scene/Lt2TanggaSelatan.jpg"/>
+        <img id="Lt2TanggaUtara" src="Scene/Lt2TanggaUtara.jpg"/>
+        <img id="Lt2TerasSelatan" src="Scene/Lt2TerasSelatan.jpg"/>
+        <img id="Lt2TerasUtara" src="Scene/Lt2TerasUtara.jpg"/>
+        <img id="Lt2ToriYo" src="Scene/Lt2Tori-Yo.jpg"/>
+
+        <!-- Scene Jalanan-->
+        <img id="JalananUtara" src="Scene/JalananUtara.jpg"/>
+        <img id="JalananTengah" src="Scene/JalananTengah(Satpam).jpg"/>
+        <img id="JalananEntranceSelatan" src="Scene/JalananEntranceSelatan.jpg"/>
+        <img id="Lobby" src="Scene/Lobby.jpg"/>
+        
+        <!-- Button Buat Pindah Lokasi --> 
+        <img id="navigationgraph" src="Buttons/Up.png"/>
+      </a-assets>
+      
+      <!-- Link 360 images ke navigationgraph -->
+      <a-entity id="NavHosts" navigationgraph>
+
+        <a-entity id="group-ElpicoPark1" scale="0 0 0">
+          <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-20 3 -10"></a-image>
+        </a-entity>
+
+        <a-entity id="group-ElpicoPark2" scale="0 0 0">
+          <a-image navhost="linkto:#ElpicoPark1;NavHostGroup:group-ElpicoPark1" position="10 1 -8"></a-image>
+          <a-image navhost="linkto:#point3;NavHostGroup:group-point3" position="0 2 10"></a-image>
+        </a-entity>
+
+        <!-- Navigasi Lantai 2 -->
+        <a-entity id="group-Lt2TerasUtara" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2TanggaUtara;NavHostGroup:group-Lt2TanggaUtara" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2TanggaUtara" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2TerasUtara;NavHostGroup:group-Lt2TerasUtara" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2MayStar;NavHostGroup:group-Lt2MayStar" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2MayStar" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2TanggaUtara;NavHostGroup:group-Lt2TanggaUtara" position="10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2_1;NavHostGroup:group-Lt2_1" position="-10 1 -2"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2_1" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2MayStar;NavHostGroup:group-Lt2MayStar" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2ToriYo;NavHostGroup:group-Lt2ToriYo" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2ToriYo" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2_1;NavHostGroup:group-Lt2_1" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2;NavHostGroup:group-Lt2" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2ToriYo;NavHostGroup:group-Lt2ToriYo" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2TanggaMiddle;NavHostGroup:group-Lt2TanggaMiddle" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2TanggaMiddle" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2;NavHostGroup:group-Lt2" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2Pilatesandflow;NavHostGroup:group-Lt2Pilatesandflow" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2Pilatesandflow" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2TanggaMiddle;NavHostGroup:group-Lt2TanggaMiddle" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2SelatanUjung;NavHostGroup:group-Lt2SelatanUjung" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2SelatanUjung" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2Pilatesandflow;NavHostGroup:group-Lt2Pilatesandflow" position="-10 1 0"></a-image>
+            <a-image navhost="linkto:#Lt2TanggaSelatan;NavHostGroup:group-Lt2TanggaSelatan" position="10 1 0"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2TanggaSelatan" >
+            <a-image navhost="linkto:#Lt2TerasSelatan;NavHostGroup:group-Lt2TerasSelatan" position="-10 1 1"></a-image>
+            <a-image navhost="linkto:#Lt2TerasSelatan;NavHostGroup:group-Lt2TerasSelatan" position="-10 -3 1"></a-image>
+            <a-image navhost="linkto:#Lt2SelatanUjung;NavHostGroup:group-Lt2SelatanUjung" position="10 1 -2"></a-image>
+        </a-entity>
+
+        <a-entity id="group-Lt2TerasSelatan" scale="0 0 0">
+            <a-image navhost="linkto:#Lt2TanggaSelatan;NavHostGroup:group-Lt2TanggaSelatan" position="10 1 0"></a-image>
+        </a-entity>
+
+        
+        <!-- Navigasi Jalanan -->
+
+      </a-entity>
+      
+      <!-- Define the starting image of the tour-->
+      <a-sky id="skybox" src="#Lt2TanggaSelatan"></a-sky>
+      
+      <!-- Camera and cursor -->
+      <a-entity id="cam" camera position="0 1.6 0" look-controls>
+        <a-entity cursor="fuse:true;fuseTimeout:2000"
+                  geometry="primitive:ring;radiusInner:0.01;radiusOuter:0.02"
+                  position="0 0 -1.8"
+                  material="shader:flat;color:#78A1BB"
+                  animation__mouseenter="property:scale;to:3 3 3;startEvents:mouseenter;endEvents:mouseleave;dir:reverse;dur:2000;loop:true">
+        </a-entity>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
