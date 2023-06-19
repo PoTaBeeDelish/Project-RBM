@@ -60,6 +60,8 @@
       
       <a-assets>
 
+
+        <!-- Scene Lantai 1 -->
         <img id="Lobby" src="Scene/Lobby.jpg">
         <img id="Lt1Dentical" src="Scene/Lt1Dentical.jpg">
         <img id="Lt1Gyu-Kaku" src="Scene/Lt1Gyu-Kaku.jpg">
@@ -118,7 +120,7 @@
 
         <a-entity id="group-Lt2TanggaUtara" scale="0 0 0">
             <a-image navhost="linkto:#Lt2TerasUtara;NavHostGroup:group-Lt2TerasUtara" position="-10 1 0"></a-image>
-            <a-image navhost="linkto:#Lt2TerasUtara;NavHostGroup:group-Lt2TerasUtara" position="-10 -4 1"></a-image>
+            <a-image navhost="linkto:#Lt1TanggaUtara;NavHostGroup:group-Lt1TanggaUtara" position="-10 -4 1"></a-image>
             <a-image navhost="linkto:#Lt2MayStar;NavHostGroup:group-Lt2MayStar" position="10 1 0"></a-image>
         </a-entity>
 
@@ -144,7 +146,7 @@
 
         <a-entity id="group-Lt2TanggaMiddle" scale="0 0 0">
             <a-image navhost="linkto:#Lt2;NavHostGroup:group-Lt2" position="0 1 10"></a-image>
-            <a-image navhost="linkto:#Lt2;NavHostGroup:group-Lt2" position="-10 -4 1.5"></a-image>
+            <a-image navhost="linkto:#Lt1Indomaret;NavHostGroup:group-Lt1Indomaret" position="-10 -4 1.5"></a-image>
             <a-image navhost="linkto:#Lt2Pilatesandflow;NavHostGroup:group-Lt2Pilatesandflow" position="-1 1 -10"></a-image>
         </a-entity>
 
@@ -160,7 +162,7 @@
 
         <a-entity id="group-Lt2TanggaSelatan" scale="0 0 0">
             <a-image navhost="linkto:#Lt2TerasSelatan;NavHostGroup:group-Lt2TerasSelatan" position="-10 1 1"></a-image>
-            <a-image navhost="linkto:#Lt2TerasSelatan;NavHostGroup:group-Lt2TerasSelatan" position="-10 -3 1"></a-image>
+            <a-image navhost="linkto:#Lt1TanggaSelatan;NavHostGroup:group-Lt1TanggaSelatan" position="-10 -3 1"></a-image>
             <a-image navhost="linkto:#Lt2SelatanUjung;NavHostGroup:group-Lt2SelatanUjung" position="10 1 -2"></a-image>
         </a-entity>
 
@@ -169,22 +171,16 @@
         </a-entity>
 
         <!-- Navigasi Jalanan -->
-        <a-entity id="group-JalananUtara" >
+        <a-entity id="group-JalananUtara" scale="0 0 0">
             <a-image navhost="linkto:#Parkiran1;NavHostGroup:group-Parkiran1" position="-5 2.5 -15"></a-image>
             <a-image navhost="linkto:#JalananTengah;NavHostGroup:group-JalananTengah" position="-5 1 8"></a-image>
-            <a-image navhost="linkto:#Parkiran1;NavHostGroup:group-Parkiran1" position="8 0 10"></a-image>
+            <a-image navhost="linkto:#ElpicoParkEntrance;NavHostGroup:group-ElpicoParkEntrance" position="8 0 10"></a-image>
         </a-entity>
 
-        <a-entity id="group-JalananTengah" scale="0 0 0">
+        <a-entity id="group-JalananTengah" >
             <a-image navhost="linkto:#JalananUtara;NavHostGroup:group-JalananUtara" position="0.5 2 -10"></a-image>
-            <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-4 2 -5"></a-image>
-            <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-0.5 1 9"></a-image>
-        </a-entity>
-
-        <a-entity id="group-Lobby" scale="0 0 0">
-            <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-20 3 -10"></a-image>
-            <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-20 3 -10"></a-image>
-            <a-image navhost="linkto:#ElpicoPark2;NavHostGroup:group-ElpicoPark2" position="-20 3 -10"></a-image>
+            <a-image navhost="linkto:#Lobby;NavHostGroup:group-Lobby" position="-4 2 -5"></a-image>
+            <a-image navhost="linkto:#JalananEntranceSelatan;NavHostGroup:group-JalananEntranceSelatan" position="-0.5 1 9"></a-image>
         </a-entity>
 
         <!-- Navigasi Parkiran -->
@@ -222,8 +218,7 @@
             <a-image navhost="linkto:#ElpicoPark3;NavHostGroup:group-ElpicoPark3" position="-4 1 1"></a-image>
         </a-entity>
 
-        <!-- Lantai 1  -->
-
+        <!-- Navigasi Lantai 1  -->
         <a-entity id="group-Lt1TanggaUtara" scale="0 0 0">
           <a-image navhost="linkto:#Lt2TanggaUtara;NavHostGroup:group-Lt2TanggaUtara" position="-10 1 2"></a-image>
           <a-image navhost="linkto:#Lt1UtaraUjung;NavHostGroup:group-Lt1UtaraUjung" position="-10 1 -8"></a-image>
@@ -251,14 +246,14 @@
         </a-entity>
 
         <a-entity id="group-Lt1Mixue" scale="0 0 0">
-          <a-image navhost="linkto:#Lt1Tori-Yo;NavHostGroup:group-Lt1Tori-Yo" position="0 1 -10"></a-image>
-          <a-image navhost="linkto:#Lt1Indomaret;NavHostGroup:group-Lt1Indomaret" position="0 1 10"></a-image>
+          <a-image navhost="linkto:#Lt1Tori-Yo;NavHostGroup:group-Lt1Tori-Yo" position="0 1 10"></a-image>
+          <a-image navhost="linkto:#Lt1Indomaret;NavHostGroup:group-Lt1Indomaret" position="0 1 -10"></a-image>
         </a-entity>
 
         <a-entity id="group-Lt1Indomaret" scale="0 0 0" >
           <a-image navhost="linkto:#Lt1Mixue;NavHostGroup:group-Lt1Mixue" position="0 1 -15"></a-image>
           <a-image navhost="linkto:#Lt1Koran;NavHostGroup:group-Lt1Koran" position="0 1 20"></a-image>
-          <a-image navhost="linkto:#Lt1Mixue;NavHostGroup:group-Lt2TanggaMiddle" position="-20 3 0"></a-image>
+          <a-image navhost="linkto:#Lt2TanggaMiddle;NavHostGroup:group-Lt2TanggaMiddle" position="-20 3 0"></a-image>
           <a-image navhost="linkto:#Lt1Koran;NavHostGroup:group-Lobby" position="-10 -1 15"></a-image>
         </a-entity>
 
@@ -288,22 +283,20 @@
         </a-entity>
 
         <a-entity id="group-Lt1TanggaSelatan" scale="0 0 0">
-          <a-image navhost="linkto:#JalananEntranceSelatan;NavHostGroup:group-JalananEntranceSelatan" position="5 1 -10"></a-image>
+          <a-image navhost="linkto:#JalananEntranceSelatan;NavHostGroup:group-JalananEntranceSelatan" position="5 1 10"></a-image>
           <a-image navhost="linkto:#Lt2TanggaSelatan;NavHostGroup:group-Lt2TanggaSelatan" position="5 1 0"></a-image>
         </a-entity>
 
-        <a-entity id="group-Lobby">
+        <a-entity id="group-Lobby" scale="0 0 0">
           <a-image navhost="linkto:#Lt1Mixue;NavHostGroup:group-Lt1Mixue" position="-10 2 -10"></a-image>
           <a-image navhost="linkto:#Lt1Indomaret;NavHostGroup:group-Lt1Indomaret" position="-10 2 10"></a-image>
-          <a-image navhost="linkto:#JalananTengah(Satpam);NavHostGroup:group-JalananTengah(Satpam)" position="5 1 10"></a-image>
+          <a-image navhost="linkto:#JalananTengah;NavHostGroup:group-JalananTengah" position="5 1 10"></a-image>
         </a-entity>
-
-      	<!-- Lantai 2 -->
 
       </a-entity>
       
       <!-- Define the starting image of the tour-->
-      <a-sky id="skybox" src="#JalananUtara"></a-sky>
+      <a-sky id="skybox" src="#JalananTengah"></a-sky>
       
       <!-- Camera and cursor -->
       <a-entity id="cam" camera position="0 1.6 0" look-controls>
